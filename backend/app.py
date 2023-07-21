@@ -2,9 +2,10 @@ from flask import Flask, request, jsonify
 import mysql.connector
 import bcrypt
 import datetime
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 # Connect to the MySQL database
 db = mysql.connector.connect(
     host='localhost',
@@ -155,6 +156,28 @@ def delete_host(host_id):
 
 
 
+@app.route('/properties', methods=['POST'])
+def create_property():
+    data = request.get_json()
+    property_name = data['property_name']
+    property_type = data['property_type']
+    property_price = data['property_price']
+    host_id = data['host_id']
+    image_url = data['image_url']
+    location = data['location']  # Get the location from the request
+
+    try:
+        if db.is_connected():
+            cursor = db.cursor()
+            query = "INSERT INTO Properties (property_name, property_type, property_price, host_id, image_url, location) VALUES (%s, %s, %s, %s, %s, %s)"
+            values = (property_name, property_type, property_price, host_id, image_url, location)
+            cursor.execute(query, values)
+            db.commit()
+            response_data = {"message": "Property created successfully!"}
+            return jsonify(response_data)  # Send a JSON response
+    except mysql.connector.Error as error:
+        response_data = {"message": "Error while creating property in MySQL: " + str(error)}
+        return jsonify(response_data)  # Send a JSON response
 
 if __name__ == '__main__':
     app.run(debug=True)
