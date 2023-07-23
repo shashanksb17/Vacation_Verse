@@ -167,6 +167,7 @@ app.get('/hosts', (req, res) => {
     });
   });
 
+
   // Authenticate a user (guest)
   app.post('/guest/login', (req, res) => {
     const { email, password } = req.body;
@@ -386,20 +387,19 @@ app.get('/hosts', (req, res) => {
     });
   });
 
-  // // Create a new booking (room booking)
-// Create a new booking (room booking)
-app.post('/bookings', verifyGuestToken, (req, res) => {
-  const { propertyId, checkIn, checkOut, No_of_guests } = req.body;
+ // Create a new booking (room booking)
+ app.post('/bookings', verifyGuestToken, (req, res) => {
+  const { start_date, end_date, property_id, couponCode, discountedPrice, no_of_people } = req.body;
   const guestId = req.userId;
 
   // Validate inputs
-  if (!propertyId || !checkIn || !checkOut || !No_of_guests) {
+  if (!start_date || !end_date || !property_id || !no_of_people) {
     return res.status(400).json({ error: 'Invalid input' });
   }
 
   // Check if the property exists and is available for booking
   const propertyQuery = 'SELECT * FROM properties WHERE id = ?';
-  connection.query(propertyQuery, [propertyId], (error, propertyResults) => {
+  connection.query(propertyQuery, [property_id], (error, propertyResults) => {
     if (error) {
       console.error('Failed to fetch property:', error);
       return res.status(500).json({ error: 'Failed to create booking' });
@@ -411,9 +411,9 @@ app.post('/bookings', verifyGuestToken, (req, res) => {
 
     const property = propertyResults[0];
 
-    // Calculate the number of days between checkIn and checkOut
-    const startDate = new Date(checkIn);
-    const endDate = new Date(checkOut);
+    // Calculate the number of days between start_date and end_date
+    const startDate = new Date(start_date);
+    const endDate = new Date(end_date);
     const days = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
 
     if (days <= 0) {
@@ -424,242 +424,151 @@ app.post('/bookings', verifyGuestToken, (req, res) => {
     const totalFare = days * property.price;
 
     // Check if the property has available rooms for the specified date range
-    const bookingQuery =
-      'SELECT COUNT(*) AS count FROM bookings WHERE property_id = ? AND ((start_date <= ? AND end_date > ?) OR (start_date >= ? AND start_date < ?))';
-    connection.query(
-      bookingQuery,
-      [propertyId, endDate, startDate, startDate, endDate],
-      (error, bookingResults) => {
-        if (error) {
-          console.error('Failed to check property availability:', error);
-          return res.status(500).json({ error: 'Failed to create booking' });
-        }
-
-        const count = bookingResults[0].count;
-        const availableRooms = property.rooms - count;
-
-        if (availableRooms < No_of_guests) {
-          return res.status(400).json({ error: 'Not enough available rooms for the selected date range' });
-        }
-
-        // Create the booking
-        const insertQuery =
-          'INSERT INTO bookings (start_date, end_date, property_id, guest_id, total_fare, property_name, booked, property_image, name, number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        connection.query(
-          insertQuery,
-          [checkIn, checkOut, propertyId, guestId, totalFare, property.name, No_of_guests, property.images, req.user.name, req.user.number],
-          (error, result) => {
-            if (error) {
-              console.error('Failed to create booking:', error);
-              return res.status(500).json({ error: 'Failed to create booking' });
-            }
-
-            const bookingId = result.insertId;
-            res.status(201).json({ bookingId, totalFare, message: 'Booking created successfully' });
-
-            // Calculate the number of booked rooms
-            const bookedRooms = count + No_of_guests;
-
-            // Calculate the updated available rooms
-            const updatedAvailableRooms = property.rooms - bookedRooms;
-
-            // Update the property's available_rooms in the database
-            const updatePropertyQuery = 'UPDATE properties SET rooms = ? WHERE id = ?';
-            connection.query(updatePropertyQuery, [updatedAvailableRooms, propertyId], (error, updateResult) => {
-              if (error) {
-                console.error('Failed to update property availability:', error);
-              }
-            });
-          }
-        );
+    const bookingQuery = 'SELECT COUNT(*) AS count FROM bookings WHERE property_id = ? AND ((start_date <= ? AND end_date > ?) OR (start_date >= ? AND start_date < ?))';
+    connection.query(bookingQuery, [property_id, endDate, startDate, startDate, endDate], (error, bookingResults) => {
+      if (error) {
+        console.error('Failed to check property availability:', error);
+        return res.status(500).json({ error: 'Failed to create booking' });
       }
-    );
+
+      // const count = bookingResults[0].count;
+      // const availableRooms = property.rooms - count;
+
+      // if (availableRooms < rooms_booked) {
+      //   return res.status(400).json({ error: 'Not enough available rooms for the selected date range' });
+      // }
+
+      // Create the booking
+      const insertQuery =
+        'INSERT INTO bookings (start_date, end_date, property_id, guest_id, total_fare, coupon_code, discounted_price, no_of_people) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+      connection.query(
+        insertQuery,
+        [start_date, end_date, property_id, guestId, totalFare, couponCode, discountedPrice, no_of_people],
+        (error, result) => {
+          if (error) {
+            console.error('Failed to create booking:', error);
+            return res.status(500).json({ error: 'Failed to create booking' });
+          }
+
+          const bookingId = result.insertId;
+          res.status(201).json({ bookingId, totalFare: totalFare-discountedPrice, message: 'Booking created successfully' });
+
+          // // Calculate the number of booked rooms
+          // const bookedRooms = count + rooms_booked;
+
+          // // Calculate the updated available rooms
+          // const updatedAvailableRooms = property.rooms - bookedRooms;
+
+          // // Update the property's available_rooms in the database
+          // const updatePropertyQuery = 'UPDATE properties SET rooms = ? WHERE id = ?';
+          // connection.query(updatePropertyQuery, [updatedAvailableRooms, property_id], (error, updateResult) => {
+          //   if (error) {
+          //     console.error('Failed to update property availability:', error);
+          //   }
+          // });
+        }
+      );
+    });
   });
 });
 
 
 
 
+app.get('/host/bookings', verifyHostToken, (req, res) => {
+  const hostId = req.hostId;
 
-  // app.post('/bookings', verifyGuestToken, (req, res) => {
-  //   const { start_date, end_date, property_id, couponCode, discountedPrice, name,number } = req.body;
-  //   const guestId = req.userId;
-  
-  //   // Validate inputs
-  //   if (!start_date || !end_date || !property_id || !rooms_booked  || !discountedPrice || !name || !number) {
-  //     return res.status(400).json({ error: 'Invalid input' });
-  //   }
-  
-  //   // Check if the property exists and is available for booking
-  //   const propertyQuery = 'SELECT * FROM properties WHERE id = ?';
-  //   connection.query(propertyQuery, [property_id], (error, propertyResults) => {
-  //     if (error) {
-  //       console.error('Failed to fetch property:', error);
-  //       return res.status(500).json({ error: 'Failed to create booking' });
-  //     }
-  
-  //     if (propertyResults.length === 0) {
-  //       return res.status(404).json({ error: 'Property not found' });
-  //     }
-  
-  //     const property = propertyResults[0];
-  
-  //     // Calculate the number of days between start_date and end_date
-  //     const startDate = new Date(start_date);
-  //     const endDate = new Date(end_date);
-  //     const days = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
-  
-  //     if (days <= 0) {
-  //       return res.status(400).json({ error: 'Invalid date range' });
-  //     }
-  
-  //     // Calculate the total fare for the booking
-  //     const totalFare = days * property.price;
-  
-  //     // Check if the property has available rooms for the specified date range
-  //     const bookingQuery = 'SELECT COUNT(*) AS count FROM bookings WHERE property_id = ? AND ((start_date <= ? AND end_date > ?) OR (start_date >= ? AND start_date < ?))';
-  //     connection.query(bookingQuery, [property_id, endDate, startDate, startDate, endDate], (error, bookingResults) => {
-  //       if (error) {
-  //         console.error('Failed to check property availability:', error);
-  //         return res.status(500).json({ error: 'Failed to create booking' });
-  //       }
-  
-  //       const count = bookingResults[0].count;
-  //       const availableRooms = property.rooms - count;
-  
-  //       if (availableRooms < rooms_booked) {
-  //         return res.status(400).json({ error: 'Not enough available rooms for the selected date range' });
-  //       }
-  
-  //       // Create the booking
-  //       const insertQuery =
-  //         'INSERT INTO bookings (start_date, end_date, property_id, guest_id, total_fare, property_name, rooms_booked, property_image, coupon_code, discounted_price, name,number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-  //       connection.query(
-  //         insertQuery,
-  //         [start_date, end_date, property_id, guestId, totalFare, property.title, rooms_booked, property.picture, couponCode, discountedPrice, name,number],
-  //         (error, result) => {
-  //           if (error) {
-  //             console.error('Failed to create booking:', error);
-  //             return res.status(500).json({ error: 'Failed to create booking' });
-  //           }
-  
-  //           const bookingId = result.insertId;
-  //           res.status(201).json({ bookingId, totalFare: discountedPrice, message: 'Booking created successfully' });
-  
-  //           // Calculate the number of booked rooms
-  //           const bookedRooms = count + rooms_booked;
-  
-  //           // Calculate the updated available rooms
-  //           const updatedAvailableRooms = property.rooms - bookedRooms;
-  
-  //           // Update the property's available_rooms in the database
-  //           const updatePropertyQuery = 'UPDATE properties SET rooms = ? WHERE id = ?';
-  //           connection.query(updatePropertyQuery, [updatedAvailableRooms, property_id], (error, updateResult) => {
-  //             if (error) {
-  //               console.error('Failed to update property availability:', error);
-  //             }
-  //           });
-  //         }
-  //       );
-  //     });
-  //   });
+  // Retrieve bookings for the host from the database
+  const query = 'SELECT b.id, b.start_date, b.end_date, b.total_fare, b.property_name, b.rooms_booked, b.property_image, b.coupon_code,b.name,b.number FROM bookings b JOIN properties p ON b.property_id = p.id WHERE p.host_id = ?';
+  connection.query(query, [hostId], (error, results) => {
+    if (error) {
+      console.error('Failed to fetch bookings:', error);
+      res.status(500).json({ error: 'Failed to fetch bookings' });
+    } else {
+      res.status(200).json(results);
+    }
   });
-  
-  
+});
 
-  
-  app.get('/host/bookings', verifyHostToken, (req, res) => {
-    const hostId = req.hostId;
-  
-    // Retrieve bookings for the host from the database
-    const query = 'SELECT b.id, b.start_date, b.end_date, b.total_fare, b.property_name, b.rooms_booked, b.property_image, b.coupon_code,b.name,b.number FROM bookings b JOIN properties p ON b.property_id = p.id WHERE p.host_id = ?';
-    connection.query(query, [hostId], (error, results) => {
-      if (error) {
-        console.error('Failed to fetch bookings:', error);
-        res.status(500).json({ error: 'Failed to fetch bookings' });
-      } else {
-        res.status(200).json(results);
-      }
-    });
-  });
-  
-  
 
-  // Get booking details
-  app.get('/bookings',verifyGuestToken, (req, res) => {
-    const guestId = req.userId;
-  console.log(req)
-    // Retrieve all bookings for the specified guest_id
-    const query = 'SELECT * FROM bookings WHERE guest_id = ?';
-    connection.query(query, [guestId], (error, results) => {
-      if (error) {
-        console.error('Failed to fetch booking details:', error);
-        return res.status(500).json({ error: 'Failed to fetch booking details' });
-      }
-  
-      if (results.length === 0) {
-        return res.status(404).json({ error: 'No bookings found for this guest' });
-      }
-  
-      res.status(200).json({ bookings: results });
-    });
-  });
-  
 
-  // Update booking details
-  app.put('/bookings/:booking_id', verifyGuestToken, (req, res) => {
-    const bookingId = req.params.booking_id;
-    const { start_date, end_date ,rooms_booked} = req.body;
-    const guestId = req.userId;
-
-    // Validate inputs
-    if (!start_date || !end_date) {
-      return res.status(400).json({ error: 'Invalid input' });
+// Get booking details ADMIN
+app.get('/bookings',verifyGuestToken, (req, res) => {
+  const guestId = req.userId;
+console.log(req)
+  // Retrieve all bookings for the specified guest_id
+  const query = 'SELECT * FROM bookings WHERE guest_id = ?';
+  connection.query(query, [guestId], (error, results) => {
+    if (error) {
+      console.error('Failed to fetch booking details:', error);
+      return res.status(500).json({ error: 'Failed to fetch booking details' });
     }
 
-    // Check if the booking exists and belongs to the authenticated guest
-    const bookingQuery = 'SELECT * FROM bookings WHERE id = ? AND guest_id = ?';
-    connection.query(bookingQuery, [bookingId, guestId], (error, bookingResults) => {
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'No bookings found for this guest' });
+    }
+
+    res.status(200).json({ bookings: results });
+  });
+});
+
+
+// Update booking details
+app.put('/bookings/:booking_id', verifyGuestToken, (req, res) => {
+  const bookingId = req.params.booking_id;
+  const { start_date, end_date ,rooms_booked} = req.body;
+  const guestId = req.userId;
+
+  // Validate inputs
+  if (!start_date || !end_date) {
+    return res.status(400).json({ error: 'Invalid input' });
+  }
+
+  // Check if the booking exists and belongs to the authenticated guest
+  const bookingQuery = 'SELECT * FROM bookings WHERE id = ? AND guest_id = ?';
+  connection.query(bookingQuery, [bookingId, guestId], (error, bookingResults) => {
+    if (error) {
+      console.error('Failed to fetch booking:', error);
+      return res.status(500).json({ error: 'Failed to update booking' });
+    }
+
+    if (bookingResults.length === 0) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+
+    // Update the booking details
+    const updateQuery = 'UPDATE bookings SET start_date = ?, end_date = ?, rooms_booked=? WHERE id = ?';
+    connection.query(updateQuery, [start_date, end_date,rooms_booked, bookingId], (error) => {
       if (error) {
-        console.error('Failed to fetch booking:', error);
+        console.error('Failed to update booking:', error);
         return res.status(500).json({ error: 'Failed to update booking' });
       }
 
-      if (bookingResults.length === 0) {
-        return res.status(404).json({ error: 'Booking not found' });
-      }
-
-      // Update the booking details
-      const updateQuery = 'UPDATE bookings SET start_date = ?, end_date = ?, rooms_booked=? WHERE id = ?';
-      connection.query(updateQuery, [start_date, end_date,rooms_booked, bookingId], (error) => {
-        if (error) {
-          console.error('Failed to update booking:', error);
-          return res.status(500).json({ error: 'Failed to update booking' });
-        }
-
-        res.status(200).json({ message: 'Booking updated successfully' });
-      });
+      res.status(200).json({ message: 'Booking updated successfully' });
     });
   });
+});
 
-  // Delete a booking
-  app.delete('/bookings/:booking_id', verifyGuestToken, (req, res) => {
-    const bookingId = req.params.booking_id;
-    const guestId = req.userId;
+// Delete a booking
+app.delete('/bookings/:booking_id', verifyGuestToken, (req, res) => {
+  const bookingId = req.params.booking_id;
+  const guestId = req.userId;
 
-    // Delete the booking
-    const query = 'DELETE FROM bookings WHERE id = ? AND guest_id = ?';
-    connection.query(query, [bookingId, guestId], (error, result) => {
-      if (error) {
-        console.error('Failed to delete booking:', error);
-        return res.status(500).json({ error: 'Failed to delete booking' });
-      }
+  // Delete the booking
+  const query = 'DELETE FROM bookings WHERE id = ? AND guest_id = ?';
+  connection.query(query, [bookingId, guestId], (error, result) => {
+    if (error) {
+      console.error('Failed to delete booking:', error);
+      return res.status(500).json({ error: 'Failed to delete booking' });
+    }
 
-      res.status(200).json({ message: 'Booking deleted successfully' });
-    });
+    res.status(200).json({ message: 'Booking deleted successfully' });
   });
+});
 
   app.listen(6000, () => {
     console.log('Server started on port 6000');
   });
+
+});
 
