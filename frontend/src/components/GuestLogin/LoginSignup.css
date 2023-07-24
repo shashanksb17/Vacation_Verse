@@ -1,0 +1,101 @@
+/* LoginSignup.css */
+
+.login-signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fafafa; /* Light gray background color */
+  }
+  
+  .form-container {
+    max-width: 500px;
+    padding: 50px;
+    background-color: #fff; /* White background color */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-size: 14px;
+    color: #999; /* Light gray label color */
+    margin-bottom: 5px;
+  }
+  
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='date'],
+  select {
+    width: 95%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #dbdbdb; /* Light gray border color */
+    border-radius: 4px;
+    background-color: #fafafa; /* Light gray input background color */
+  }
+  
+  input[type='submit'] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #FF8989; /* Instagram blue button background color */
+    color: #fff; /* White button text color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  input[type='submit']:hover {
+    background-color: #FF6666; /* Darker shade of Instagram blue for button hover */
+  }
+  
+  .mode-switch {
+    text-align: center;
+  }
+  
+  .mode-switch span {
+    color: #999; /* Light gray link color */
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 600px) {
+    .form-container {
+      max-width: 100%;
+      padding: 20px;
+    }
+  
+    h1 {
+      font-size: 22px;
+    }
+  
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='date'],
+    select {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    input[type='submit'] {
+      font-size: 16px;
+      padding: 8px;
+    }
+  }
+  

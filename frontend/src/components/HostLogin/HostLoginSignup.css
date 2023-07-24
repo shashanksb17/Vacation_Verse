@@ -1,0 +1,117 @@
+/* LoginSignup.css */
+
+/* General styles for all elements within .login-signup-container */
+.login-signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+    background-color: #f8f8f8; /* Light gray background color */
+    margin-top: 50px;
+
+  }
+  
+  .form-container {
+    max-width: 500px;
+    padding: 40px;
+    background-color: #fff; /* White background color */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add margin to the top of the form container */
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-size: 14px;
+    color: #777; /* Slightly darker label color */
+    margin-bottom: 5px;
+  }
+  
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='date'],
+  select,
+  textarea {
+    width: 95%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Light gray border color */
+    border-radius: 4px;
+    background-color: #f2f2f2; /* Light gray input background color */
+  }
+  
+  input[type='text']:focus,
+  input[type='email']:focus,
+  input[type='password']:focus,
+  input[type='date']:focus,
+  select:focus,
+  textarea:focus {
+    border: 1px solid #FF6666; /* Instagram blue border color on focus */
+    outline: none;
+  }
+  
+  input[type='submit'] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #FF8989; /* Instagram blue button background color */
+    color: #fff; /* White button text color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  input[type='submit']:hover {
+    background-color: #482222; /* Darker shade of Instagram blue for button hover */
+  }
+  
+  .mode-switch {
+    text-align: center;
+  }
+  
+  .mode-switch span {
+    color: #999; /* Light gray link color */
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 600px) {
+    .form-container {
+      max-width: 100%;
+      padding: 20px;
+    }
+  
+    h1 {
+      font-size: 22px;
+    }
+  
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='date'],
+    select,
+    textarea {
+      font-size: 14px;
+      padding: 8px;
+    }
+  
+    input[type='submit'] {
+      font-size: 16px;
+      padding: 8px;
+    }
+  }
+  
