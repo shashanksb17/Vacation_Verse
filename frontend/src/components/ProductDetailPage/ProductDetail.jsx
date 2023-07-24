@@ -31,6 +31,8 @@ export default function ProductDetail() {
             window.location.href = url;
     }
  
+  
+ 
   };
 
   return (
