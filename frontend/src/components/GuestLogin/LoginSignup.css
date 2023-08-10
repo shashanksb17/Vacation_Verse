@@ -51,7 +51,7 @@
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    background-color: #FF8989; /* Instagram blue button background color */
+    background-color: #3897f0; /* Instagram blue button background color */
     color: #fff; /* White button text color */
     border: none;
     border-radius: 4px;
@@ -60,7 +60,7 @@
   }
   
   input[type='submit']:hover {
-    background-color: #FF6666; /* Darker shade of Instagram blue for button hover */
+    background-color: #3182d6; /* Darker shade of Instagram blue for button hover */
   }
   
   .mode-switch {

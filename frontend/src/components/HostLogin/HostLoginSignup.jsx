@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react';
 import './HostLoginSignup.css';
+import { useNavigate } from 'react-router-dom';
 
 const LoginSignup = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -30,7 +33,7 @@ const LoginSignup = () => {
     // Call the login or signup API endpoint based on the selected mode
     if (mode === 'login') {
       // Call login API endpoint
-      fetch('https://expensive-newt-snaps.cyclic.app/host/login', {
+      fetch('https://puzzled-cow-coveralls.cyclic.app/host/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,6 +44,12 @@ const LoginSignup = () => {
         .then((data) => {
           // Handle login response
           console.log('Login:', data);
+          if(data.success){
+            alert("Login Success")
+            localStorage.setItem("hostToken",data.token)
+      
+            navigate('/HostProfile');
+          }
         })
         .catch((error) => {
           // Handle login error
@@ -48,7 +57,7 @@ const LoginSignup = () => {
         });
     } else {
       // Call signup API endpoint
-      fetch('https://expensive-newt-snaps.cyclic.app/host/signup', {
+      fetch('https://puzzled-cow-coveralls.cyclic.app/host/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,6 +68,11 @@ const LoginSignup = () => {
         .then((data) => {
           // Handle signup response
           console.log('Signup:', data);
+          if(data.success){
+            alert("Signup Success")
+            navigate('/');
+          }
+       
         })
         .catch((error) => {
           // Handle signup error

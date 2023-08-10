@@ -1,78 +1,80 @@
 /* Home.css */
 
-/* Define the brown color palette using CSS variables */
-:root {
-  --primary-bg-color: #FFEADD;
-  --secondary-bg-color: #FCAEAE;
-  --text-color: #000000;
-  --hover-color: #FF6666;
-}
-
+/* Styling for the container */
 .container {
-  width: 90%;
+    width: 80%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     padding: 20px;
     margin: auto;
-}
-
-.card {
-  width: 300px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: var(--primary-bg-color);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  text-decoration: none;
-}
-.card>div:nth-child(2){
-  padding:0px 15px;
-  text-decoration: none;
-}
-.card:hover {
-  transform: scale(1.05);
-  background-color: var(--hover-color);
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.card h3,
-.card h4,
-.card p {
-  text-decoration: none;
-  color: var(--text-color);
-}
-
-.card h3 {
-  margin-top: 12px;
-}
-
-.card p {
-  display: flex;
-  align-items: center;
-}
-
-.card p svg {
-  margin-right: 5px;
-}
-
-.card p svg path {
-  fill: var(--text-color);
-}
-
-/* Responsiveness */
-@media screen and (max-width: 768px) {
-  .container {
-    justify-content: center;
   }
-
+  
+  /* Styling for individual cards */
   .card {
-    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #fff;
   }
-}
+  
+  /* Styling for the card image */
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  /* Styling for the card title */
+  .card h3 {
+    margin: 10px 0;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  /* Styling for the rating */
+  .card p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #ffac33;
+  }
+  
+  /* Styling for the star icon */
+  .card p svg {
+    margin-right: 5px;
+  }
+  
+  /* Styling for the location */
+  .card p,
+  .card h4 {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Styling for the price */
+  .card h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #22b8cf;
+  }
+  
+  /* Styling for the login and signup buttons */
+  div > button {
+    margin: 10px 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #22b8cf;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  div > button:hover {
+    background-color: #1a98b9;
+  }
+  

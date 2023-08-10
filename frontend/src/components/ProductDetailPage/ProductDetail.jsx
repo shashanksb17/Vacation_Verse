@@ -14,7 +14,7 @@ export default function ProductDetail() {
   const [numberOfGuests, setNumberOfGuests] = useState('');
 
   useEffect(() => {
-    fetch(`https://expensive-newt-snaps.cyclic.app/properties/${Id}`)
+    fetch(`https://puzzled-cow-coveralls.cyclic.app/properties/${Id}`)
       .then((res) => res.json())
       .then((data) => setData(data.properties))
       .catch((err) => console.log(err));
@@ -30,8 +30,6 @@ export default function ProductDetail() {
 
             window.location.href = url;
     }
- 
-  
  
   };
 

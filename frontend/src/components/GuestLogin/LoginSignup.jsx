@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import './LoginSignup.css';
+import { useNavigate } from 'react-router-dom';
 
 const LoginSignup = () => {
+  const navigate = useNavigate();
+
+ 
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -21,7 +26,7 @@ const LoginSignup = () => {
     // Call the login or signup API endpoint based on the selected mode
     if (mode === 'login') {
       // Call login API endpoint
-      fetch('https://expensive-newt-snaps.cyclic.app/guest/login', {
+      fetch('https://puzzled-cow-coveralls.cyclic.app/guest/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,6 +37,8 @@ const LoginSignup = () => {
         .then((data) => {
           // Handle login response
           console.log('Login:', data);
+          localStorage.setItem("guestToken",data.token)
+          navigate('/', { replace: true });
         })
         .catch((error) => {
           // Handle login error
@@ -39,7 +46,7 @@ const LoginSignup = () => {
         });
     } else {
       // Call signup API endpoint
-      fetch('https://expensive-newt-snaps.cyclic.app/guest/register', {
+      fetch('https://puzzled-cow-coveralls.cyclic.app/guest/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

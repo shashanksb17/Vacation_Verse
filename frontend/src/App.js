@@ -11,6 +11,8 @@ import LoginSignup from './components/GuestLogin/LoginSignup.jsx';
 import HostLoginSignup from "./components/HostLogin/HostLoginSignup.jsx"
 import PaymentPage from './components/PaymentPage/PaymentPage.jsx';
 import Navigation from './components/Navigation/Navigation.js';
+import Bookings from './components/Bookings/Bookings.jsx';
+import HostProfile from './components/HostProfile/HostProfile.jsx';
 const App = () => {
  
   return (
@@ -23,11 +25,13 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/HostLogin" element={<HostLoginSignup />} />
         <Route path="/LoginSignup" element={<LoginSignup />} />
+        <Route path="/bookings" element={<Bookings/>} />
+        <Route path="/HostProfile" element={<HostProfile/>} />
         <Route path="/account/:hostId" element={<HostAccount />} />
         <Route path="/detail/:Id" element={<ProductDetail />} />
         <Route
           path="/payment/:id"
-          element={<PaymentPage />}
+          element={<PaymentPage/>}
         />
       </Routes>
    

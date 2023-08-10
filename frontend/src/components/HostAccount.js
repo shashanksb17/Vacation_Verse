@@ -10,7 +10,7 @@ const HostAccount = () => {
 
   // Fetch the host details when the component mounts
   useEffect(() => {
-    fetch(`http://localhost:5000/hosts/${hostId}`) // Replace with the actual endpoint for fetching a host by ID
+    fetch(`https://puzzled-cow-coveralls.cyclic.app/hosts/${hostId}`) // Replace with the actual endpoint for fetching a host by ID
       .then((response) => response.json())
       .then((data) => {
         setHost(data);

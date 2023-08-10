@@ -1,0 +1,27 @@
+/* Bookings.css */
+.bookings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .Booking-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .Booking-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .Booking-card p {
+    margin: 5px 0;
+  }
+  
+  /* Optional: Add more styles as needed */
+  
