@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from './components/Home.jsx';
+import Home from './components/Properties/Home.jsx';
 
 import HostAccount from './components/HostAccount.js';
 import ProductDetail from './components/ProductDetailPage/ProductDetail.jsx';
@@ -13,6 +13,7 @@ import PaymentPage from './components/PaymentPage/PaymentPage.jsx';
 import Navigation from './components/Navigation/Navigation.js';
 import Bookings from './components/Bookings/Bookings.jsx';
 import HostProfile from './components/HostProfile/HostProfile.jsx';
+import LandingPage from './components/Landing.jsx';
 const App = () => {
  
   return (
@@ -21,8 +22,8 @@ const App = () => {
           <Navigation/>
         </div>
       <Routes>
-   
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/properties" element={<Home />} />
         <Route path="/HostLogin" element={<HostLoginSignup />} />
         <Route path="/LoginSignup" element={<LoginSignup />} />
         <Route path="/bookings" element={<Bookings/>} />

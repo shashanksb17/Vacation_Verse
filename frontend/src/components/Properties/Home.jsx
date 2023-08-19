@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Link} from "react-router-dom"
 import "./Home.css"
 import { AiTwotoneStar } from 'react-icons/ai';
+import Footer from '../Footer/Footer';
 
 
 export default function Home() {
@@ -44,7 +45,7 @@ export default function Home() {
           )
         })}
        </div>
-
+        <Footer/>
     </div>
   )
 }

@@ -1,0 +1,30 @@
+.info-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+  }
+  
+  .info-container {
+    flex: 1;
+    padding-right: 0px;
+  }
+  
+  .info-content {
+    width: 600px;
+  }
+  h2{
+    font-size: 35px;
+  }
+  p{
+    font-size: 18px;
+  }
+  
+  .map-container {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 20px;
+    height: 415px;
+  }
+  .mapouter{position:relative;text-align:right;width:690px;height:415px;}.gmap_canvas {overflow:hidden;background:none!important;width:690px;height:415px;}.gmap_iframe {width:690px!important;height:415px!important;}
+  
