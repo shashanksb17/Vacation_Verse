@@ -7,7 +7,7 @@ export default function Bookings() {
     const [bookings,setBookings]=useState([])
 
     useEffect(()=>{
-        fetch('https://puzzled-cow-coveralls.cyclic.app/bookings', {
+        fetch('https://homestead.onrender.com/bookings', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

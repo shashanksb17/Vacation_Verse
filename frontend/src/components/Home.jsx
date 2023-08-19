@@ -10,7 +10,7 @@ export default function Home() {
 
 
   useEffect(()=>{
-    fetch(`https://staynest.onrender.com/properties`)
+    fetch(`https://homestead.onrender.com/properties`)
     .then((res)=>res.json())
     .then((data)=>setData(data))
     .catch((err)=>console.log(err))

@@ -10,7 +10,7 @@ const HostAccount = () => {
 
   // Fetch the host details when the component mounts
   useEffect(() => {
-    fetch(`https://puzzled-cow-coveralls.cyclic.app/hosts/${hostId}`) // Replace with the actual endpoint for fetching a host by ID
+    fetch(`https://homestead.onrender.com/hosts/${hostId}`) // Replace with the actual endpoint for fetching a host by ID
       .then((response) => response.json())
       .then((data) => {
         setHost(data);
@@ -30,14 +30,14 @@ const HostAccount = () => {
 
   const handleSave = () => {
     // Send formData to the server for updating the host
-    fetch(`http://localhost:5000/hosts/${hostId}`, {
+    fetch(`https://homestead.onrender.com/hosts/${hostId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
     })
       .then(() => {
         // Refresh the host details after successful update
-        fetch(`http://localhost:5000/hosts/${hostId}`)
+        fetch(`https://homestead.onrender.com/hosts/${hostId}`)
           .then((response) => response.json())
           .then((data) => {
             setHost(data);

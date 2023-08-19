@@ -14,7 +14,7 @@ export default function ProductDetail() {
   const [numberOfGuests, setNumberOfGuests] = useState('');
 
   useEffect(() => {
-    fetch(`https://staynest.onrender.com/properties/${Id}`)
+    fetch(`https://homestead.onrender.com/properties/${Id}`)
       .then((res) => res.json())
       .then((data) => setData(data.properties))
       .catch((err) => console.log(err));

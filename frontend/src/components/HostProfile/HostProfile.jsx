@@ -68,7 +68,7 @@ export default function HostProfile() {
         })
         //------------------
         console.log(token)
-        fetch('https://puzzled-cow-coveralls.cyclic.app/properties', {
+        fetch('https://homestead.onrender.com/properties', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -85,11 +85,6 @@ export default function HostProfile() {
              alert("invalid")
               console.error( error);
             });
-
-    //     axios.post("https://puzzled-cow-coveralls.cyclic.app/properties",formData)
-    //     .then((res)=>{
-    //         console.log(res);
-    //    })
     }
 
     useEffect(()=>{

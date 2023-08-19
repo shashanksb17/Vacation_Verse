@@ -33,7 +33,7 @@ const LoginSignup = () => {
     // Call the login or signup API endpoint based on the selected mode
     if (mode === 'login') {
       // Call login API endpoint
-      fetch('https://puzzled-cow-coveralls.cyclic.app/host/login', {
+      fetch('https://homestead.onrender.com/host/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ const LoginSignup = () => {
         });
     } else {
       // Call signup API endpoint
-      fetch('https://puzzled-cow-coveralls.cyclic.app/host/signup', {
+      fetch('https://homestead.onrender.com/host/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

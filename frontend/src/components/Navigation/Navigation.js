@@ -8,7 +8,7 @@ const Navigation = () => {
       <ul>
         <li>
           <Link to="/">
-            StayNest
+            VacationVerse
           </Link>
         </li>
         <li>

@@ -25,7 +25,7 @@ export default function PaymentPage() {
         no_of_people: guests,
       };
   
-      fetch('https://puzzled-cow-coveralls.cyclic.app/bookings', {
+      fetch('https://homestead.onrender.com/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
