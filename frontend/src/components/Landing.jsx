@@ -12,9 +12,9 @@ import Footer from "./Footer/Footer";
 export default function LandingPage() {
   return (
     <div className="App">
-        <div className="landing-info-container">
-        <Landinginfo />
-      </div>
+        <p>
+        <span>Welcome to VacationVerse </span> Experience the world with us and let VacationVerse be your guide to extraordinary getaways.
+        </p>
       <AliceCarousel autoPlay autoPlayInterval={3000} infinite={true}>
         <div className="sliderimg-container">
           <img src={image1} className="sliderimg" alt=""/>
@@ -29,6 +29,9 @@ export default function LandingPage() {
           <img src={image4} className="sliderimg" alt=""/>
         </div>
       </AliceCarousel>
+      <div className="landing-info-container">
+        <Landinginfo />
+      </div>
       <Footer/>
     </div>
   );

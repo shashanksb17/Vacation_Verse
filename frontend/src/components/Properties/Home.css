@@ -2,9 +2,9 @@
 
 /* Styling for the container */
 .container {
-    width: 80%;
+    width: 90%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
     gap: 20px;
     padding: 20px;
     margin: auto;
@@ -27,11 +27,11 @@
     border-radius: 8px;
   }
   
-  /* Styling for the card title */
   .card h3 {
     margin: 10px 0;
     font-size: 20px;
     color: #333;
+    text-decoration: none; 
   }
   
   /* Styling for the rating */
@@ -40,6 +40,7 @@
     align-items: center;
     font-size: 16px;
     color: #ffac33;
+    text-decoration: none; 
   }
   
   /* Styling for the star icon */
@@ -58,7 +59,7 @@
   .card h4 {
     font-size: 18px;
     font-weight: bold;
-    color: #22b8cf;
+    color: #486862;
   }
   
   /* Styling for the login and signup buttons */
@@ -77,4 +78,37 @@
   div > button:hover {
     background-color: #1a98b9;
   }
+  .Seemore{
+    margin-top: 10px;
+    background-color: #678983;
+    border: none;
+    width: 120px;
+    height: 40px;
+    font-size: 15px;
+    color: #fff;
+    border-radius: 5px;
+  }
+  .Seemore:hover{
+    background-color: #486a64;
+    cursor: pointer;
+  }
+  .golden {
+    color: #ffac33; 
+  }
+  .night{
+    color: #555;
+    font-weight: 400;
+  }
+  #like{
+    background-color: transparent;
+    color: red;
+    font-size: 25px;
+  }
+  #like {
+    position: absolute;
+    margin-top: -120px;
+    margin-left: 235px;
+  }
+
+  
   

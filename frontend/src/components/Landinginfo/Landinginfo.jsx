@@ -21,9 +21,7 @@ const Landinginfo = () => {
                 With VacationVerse, you can embark on unforgettable journeys, create cherished memories,
                 and indulge in the art of relaxation.
               </p>
-              <p>
-                Experience the world with us and let VacationVerse be your guide to extraordinary getaways.
-              </p>
+             
             </div>
           </div>
           <div className="map-container">

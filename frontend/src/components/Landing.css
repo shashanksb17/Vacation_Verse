@@ -30,6 +30,13 @@
     width: 1000px;
     box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   }
+  .App>p{
+    text-align: center;
+  }
+ .App>p>span{
+    font-size: 25px;
+    font-weight: 700;
+  }
 
 
   

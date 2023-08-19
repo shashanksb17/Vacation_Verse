@@ -1,202 +1,200 @@
-/* ProductDetail.css */
 body{
-    background-color: #f1f8ff; /* Sky blue background color */
+  background-color: #f1f8ff; 
 }
-/* Main container */
-.main {
-    width: 80%;
-    margin: 0 auto; /* Center the content horizontally */
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 50px;
-    background-color: #e5f1fec2; /* Sky blue background color */
-  }
-  
-  /* Product Info section */
-  .product-info {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .product-info h3 {
-    font-size: 24px;
-    color:  #1a98b9; /* Darker shade of sky blue for button hover */
 
+.main {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 50px;
+  background-color: #e5f1fec2; 
+}
+
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-info h3 {
+  font-size: 24px;
+  color:  #1a98b9; 
+
+}
+
+.product-info p {
+  font-size: 18px;
+  color: #070707;
+  margin: 5px 0;
+}
+
+
+.image-gallery {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.image-gallery .main-images {
+  width: 50%;
+}
+
+.image-gallery .main-images img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.side-images {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.side-images img {
+  width: 100%;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+
+.property-info {
+  padding: 10px;
+  width: 50%;
+}
+
+.property-info h3 {
+  font-size: 20px;
+  color: #22b8cf; 
+  margin-bottom: 5px;
+}
+
+.property-info hr {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.property-info p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
+
+
+.amenities {
+  display: flex;
+  gap: 20px;
+}
+
+.amenities-left,
+.amenities-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.amenities h3 {
+  font-size: 20px;
+  color: #22b8cf; 
+  margin-bottom: 5px;
+}
+
+.amenities p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
+
+
+.booking-card {
+  width: 25%;
+  padding: 25px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-items:center;
+  background-color: #fff; 
+  position: fixed;
+  right: 10%;
+  top: 70%;
+  transform: translateY(-50%);
+}
+
+.booking-card label {
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+.booking-card input[type='date'],
+.booking-card input[type='number'] {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.booking-card button {
+  grid-column: span 2;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #22b8cf; 
+  color: #fff; 
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.booking-card button:hover {
+  background-color: #1a98b9;
+}
+
+
+@media screen and (max-width: 768px) {
+  .main {
+    width: 100%; 
+    padding: 20px;
   }
-  
-  .product-info p {
-    font-size: 18px;
-    color: #070707;
-    margin: 5px 0;
-  }
-  
-  /* Image and Gallery section */
+
   .image-gallery {
-    display: flex;
-    gap: 20px;
+    flex-direction: column;
     align-items: flex-start;
   }
-  
-  .image-gallery .main-images {
-    width: 50%;
-  }
-  
-  .image-gallery .main-images img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-  }
-  
+
   .side-images {
     width: 50%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
   }
-  
-  .side-images img {
-    width: 100%;
-    height: 100px;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-  
-  /* Property Info section */
-  .property-info {
-    padding: 10px;
-    width: 50%;
-  }
-  
-  .property-info h3 {
-    font-size: 20px;
-    color: #22b8cf; /* Sky blue text color */
-    margin-bottom: 5px;
-  }
-  
-  .property-info hr {
-    margin: 10px 0;
-    border: none;
-    border-top: 1px solid #ccc;
-  }
-  
-  .property-info p {
-    font-size: 16px;
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  /* Amenities section */
-  .amenities {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .amenities-left,
-  .amenities-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .amenities h3 {
-    font-size: 20px;
-    color: #22b8cf; /* Sky blue text color */
-    margin-bottom: 5px;
-  }
-  
-  .amenities p {
-    font-size: 16px;
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  /* Booking card section */
+
   .booking-card {
-    width: 25%;
-    padding: 25px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    align-items:center;
-    background-color: #fff; /* White background color for the booking card */
-    position: fixed;
-    right: 10%;
+    width: 65%;
+    right: 15%;
     top: 70%;
-    transform: translateY(-50%);
   }
-  
-  .booking-card label {
-    font-size: 16px;
-    color: #333;
-    font-weight: bold;
-  }
-  
+
   .booking-card input[type='date'],
   .booking-card input[type='number'] {
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    font-size: 14px;
+    padding: 6px;
   }
-  
-  .booking-card button {
-    grid-column: span 2;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #22b8cf; /* Sky blue button background color */
-    color: #fff; /* White button text color */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+
+  .amenities {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .booking-card button:hover {
-    background-color: #1a98b9; /* Darker shade of sky blue for button hover */
+
+  .amenities-left,
+  .amenities-right {
+    width: 100%;
   }
-  
-  /* Responsive styles for small screens */
-  @media screen and (max-width: 768px) {
-    .main {
-      width: 100%; /* Full width for small screens */
-      padding: 20px; /* Reduce padding for small screens */
-    }
-  
-    .image-gallery {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .side-images {
-      width: 50%;
-    }
-  
-    .booking-card {
-      width: 65%;
-      right: 15%;
-      top: 70%;
-    }
-  
-    .booking-card input[type='date'],
-    .booking-card input[type='number'] {
-      font-size: 14px;
-      padding: 6px;
-    }
-  
-    .amenities {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .amenities-left,
-    .amenities-right {
-      width: 100%;
-    }
-  }
-  
+}

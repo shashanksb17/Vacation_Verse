@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default function ProductDetail() {
   const { Id } = useParams();
-
+  console.log(Id);
   const [data, setData] = useState([]);
   const [checkInDate, setCheckInDate] = useState('');
   const [checkOutDate, setCheckOutDate] = useState('');
