@@ -109,6 +109,79 @@
     margin-top: -120px;
     margin-left: 235px;
   }
+  #features{
+    width: 100%;
+  }
+#search{
+  display: flex;
+  
+  gap: 20px;
+  padding-left: 20px;
+}
+  #nameSearchQuery,#locationSearchQuery{
+    margin-top: 10px;
+    width: 400px;
+    background-color: transparent;
+    border:3px solid #678983b0;
+    border-radius: 10px;
+  }
+  #minPrice,#maxPrice{
+    width: 200px;
+  }
+  #featuresss{
+    font-size: 17px;
+    color: black;
+    font-weight: 500;
+  }
+  #minPrice,#maxPrice{
+    height: 20px;
+    background-color: transparent;
+    border:3px solid #678983b0;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  #sildermax{
+    display: flex;  
+    gap: 20px;
+  }
+  #range{
+    width: 300px;
+  }
+  .slider-container {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    width: 350px;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    
+    width: 100%;
+    height: 10px;
+    border-radius: 10px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #478176;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #678983;
+    cursor: pointer;
+  }
 
-  
-  

@@ -7,13 +7,9 @@ import './Navigation.css';
 
 
 const handleSignout = () => {
- 
   // Clear the guestToken from session storage and perform logout logic
-  localStorage.removeItem('guestToken');
+  localStorage.removeItem('guestName');
   localStorage.removeItem('hostName');
-
-  
-
 };
 
 const Navigation = () => {
@@ -45,10 +41,12 @@ const Navigation = () => {
           <Link to="/bookings">Bookings</Link>
         </li>
         <li>
-        <Link>
-          {hostName && <span>{hostName}</span>}
-          {!hostName && guestName && <span>{guestName}</span>}
-        </Link>
+        {hostName || guestName ? (
+          <Link>
+            {hostName && <span>{hostName}</span>}
+            {!hostName && guestName && <span>{guestName}</span>}
+          </Link>
+        ) : null}
         </li>
         <li onClick={toggleHostDropdown}>
           
@@ -75,12 +73,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-
-
-
-
-
-
-
-
-

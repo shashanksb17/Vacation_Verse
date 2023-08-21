@@ -99,7 +99,7 @@ const LoginSignup = () => {
           console.log('Signup:', data);
           if(data.message=="Host registered successfully"){
             MySwal.fire(
-              'User Registered Successfully',
+              'Host Registered Successfully',
               'Please click the button!',
               'success'
             )
