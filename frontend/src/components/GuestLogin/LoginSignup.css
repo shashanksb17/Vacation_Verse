@@ -1,19 +1,31 @@
 /* LoginSignup.css */
-
+body{
+  background-color: #fff;
+}
+#img{
+  mix-blend-mode: multiply,;
+  margin-top: -200px;
+  margin-left: -200px;
+}
 .login-signup-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #fafafa; /* Light gray background color */
+    background-color: #ffffff; /* Light gray background color */
+    margin: 0;
+    padding: 0;
   }
   
   .form-container {
-    max-width: 500px;
+
+    width: 400px;
     padding: 50px;
     background-color: #fff; /* White background color */
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-top: -200px;
+    margin-left: 20px;
   }
   
   h1 {

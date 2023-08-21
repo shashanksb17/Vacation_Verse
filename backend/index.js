@@ -85,7 +85,7 @@ connection.connect((error) => {
           console.error('Failed to register host:', error);
           res.status(500).json({ message: 'Failed to register host' });
         } else {
-          res.status(201).json({ message: 'Host registered successfully' });
+          res.status(201).json({ message: 'Host registered successfully',success:true });
         }
       });
     });
@@ -132,7 +132,7 @@ app.get('/hosts', (req, res) => {
           res.status(500).json({ message: 'Failed to authenticate host' });
         } else if (isMatch) {
           const token = jwt.sign({ hostId: host.id }, process.env.JWT_SECRET);
-          res.status(200).json({ success: true, token });
+          res.status(200).json({ success: true, token , name:host.name});
         } else {
           res.status(401).json({ success: false, message: 'Invalid credentials' });
         }
@@ -197,11 +197,9 @@ app.get('/hosts', (req, res) => {
           const query1='SELECT name FROM guests WHERE email = ?';
            connection.query(query1, [email], (error, results) => {
           const name=results[0]
-          res.status(200).json({ success: true, token , name});
-           })
-          
-        } else {
-  
+          res.status(200).json({message: 'Login Successful', success: true, token , name});
+           })        
+        } else { 
           res.status(401).json({ message: 'Invalid credentials' });
         }
       });

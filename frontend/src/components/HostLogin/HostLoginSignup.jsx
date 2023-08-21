@@ -3,6 +3,10 @@
 import React, { useState } from 'react';
 import './HostLoginSignup.css';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
 
 const LoginSignup = () => {
   const navigate = useNavigate();
@@ -45,19 +49,43 @@ const LoginSignup = () => {
           // Handle login response
           console.log('Login:', data);
           if(data.success){
-            alert("Login Success")
             localStorage.setItem("hostToken",data.token)
-      
+            MySwal.fire(
+              'Login Successful',
+              'Please click the button!',
+              'success'
+            )      
             navigate('/HostProfile');
+          }
+          else if(data.message=="Invalid credentials"){
+            MySwal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Invalid credentials',
+              
+            })
+          }
+          else{
+            MySwal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Failed to Authenticate User',
+              
+            })
           }
         })
         .catch((error) => {
-          // Handle login error
           console.error('Login error:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
         });
     } else {
       // Call signup API endpoint
-      fetch('https://homestead.onrender.com/host/signup', {
+      fetch('https://homestead.onrender.com/host/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,21 +96,41 @@ const LoginSignup = () => {
         .then((data) => {
           // Handle signup response
           console.log('Signup:', data);
-          if(data.success){
-            alert("Signup Success")
-            navigate('/');
+          if(data.message=="Host registered successfully"){
+            MySwal.fire(
+              'User Registered Successfully',
+              'Please click the button!',
+              'success'
+            )
+            //switch mode to login
+          }
+          else {
+            MySwal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Failed to Register User',            
+            })
           }
        
         })
         .catch((error) => {
           // Handle signup error
           console.error('Signup error:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
         });
     }
   };
 
   return (
     <div className="login-signup-container">
+      <div>
+        <img id='img' src="https://iili.io/HpXbjvp.jpg" alt="" />
+      </div>
       <div className="form-container">
       <h1>{mode === 'login' ? 'Host Login' : 'Host Sign Up'}</h1>
         <form onSubmit={handleSubmit}>

@@ -6,18 +6,23 @@
     justify-content: center;
     align-items: center;
     height: 120vh;
-    background-color: #f8f8f8; /* Light gray background color */
-    margin-top: 0px;
+    background-color: #ffffff; /* Light gray background color */
+    margin-top: 50px;
 
+  }
+  #img{
+    mix-blend-mode: multiply;
+    height: 600px;
+    width: 800px;
   }
   
   .form-container {
+    margin-top: 0px;
     max-width: 500px;
     padding: 40px;
     background-color: #fff; /* White background color */
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Add margin to the top of the form container */
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   }
   
   h1 {
@@ -83,7 +88,7 @@
   }
   
   .mode-switch span {
-    color: #999; /* Light gray link color */
+    color: #0082be; /* Light gray link color */
     cursor: pointer;
     text-decoration: underline;
   }
