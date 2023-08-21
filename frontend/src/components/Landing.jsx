@@ -15,7 +15,7 @@ export default function LandingPage() {
         <p>
         <span>Welcome to VacationVerse </span> Experience the world with us and let VacationVerse be your guide to extraordinary getaways.
         </p>
-      <AliceCarousel autoPlay autoPlayInterval={3000} infinite={true}>
+      <AliceCarousel autoPlay autoPlayInterval={2500} infinite={true}>
         <div className="sliderimg-container">
           <img src={image1} className="sliderimg" alt=""/>
         </div>

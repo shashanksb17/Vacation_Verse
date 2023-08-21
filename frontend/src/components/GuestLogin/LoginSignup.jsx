@@ -44,6 +44,7 @@ const LoginSignup = () => {
           console.log('Login:', data);
           if(data.success){
             localStorage.setItem("guestToken",data.token)
+            localStorage.setItem("guestName",data.name)
             MySwal.fire(
               'Login Successful',
               'Please click the button!',

@@ -4,6 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import './Navigation.css';
 // eslint-disable-next-line
+
+
+const handleSignout = () => {
+ 
+  // Clear the guestToken from session storage and perform logout logic
+  localStorage.removeItem('guestToken');
+  localStorage.removeItem('hostName');
+
+  
+
+};
+
 const Navigation = () => {
   const [showHostDropdown, setShowHostDropdown] = useState(false);
   const [showGuestDropdown, setShowGuestDropdown] = useState(false);
@@ -17,6 +29,8 @@ const Navigation = () => {
     setShowGuestDropdown(!showGuestDropdown);
     setShowHostDropdown(false);
   };
+  const hostName = localStorage.getItem('hostName');
+  const guestName = localStorage.getItem('guestName');
 
   return (
     <nav className="navbar">
@@ -30,10 +44,14 @@ const Navigation = () => {
         <li>
           <Link to="/bookings">Bookings</Link>
         </li>
-        {/* <li>
-          <Link to="/chat">Chat</Link>
-        </li> */}
+        <li>
+        <Link>
+          {hostName && <span>{hostName}</span>}
+          {!hostName && guestName && <span>{guestName}</span>}
+        </Link>
+        </li>
         <li onClick={toggleHostDropdown}>
+          
           <div className="dropdown-toggle">
           <FontAwesomeIcon icon={faUser} className="icon" />
           </div>
@@ -45,6 +63,9 @@ const Navigation = () => {
               <li>
                 <Link to="/LoginSignup">Guest</Link>
               </li>
+              <li>
+                <Link onClick={handleSignout}>Logout</Link>
+              </li>
             </ul>
           )}
         </li>
@@ -54,3 +75,12 @@ const Navigation = () => {
 };
 
 export default Navigation;
+
+
+
+
+
+
+
+
+

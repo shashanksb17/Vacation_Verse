@@ -6,7 +6,7 @@ const Landinginfo = () => {
         <section className="info-section">
           <div className="info-container">
             <div className="info-content">
-              <h2>Welcome to VacationVerse</h2>
+              
               <p>Discover Your Dream Getaway</p>
               <p>
                 At VacationVerse, we believe that every traveler deserves an exceptional experience. 
