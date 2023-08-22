@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './ProductDetail.css';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
@@ -8,6 +8,8 @@ import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
 
 export default function ProductDetail() {
+  const navigate = useNavigate();
+
   const { Id } = useParams();
   const [data, setData] = useState([]);
   const [checkInDate, setCheckInDate] = useState('');
@@ -39,6 +41,12 @@ export default function ProductDetail() {
       return;
     }
     try {
+      const propertyResponse = await fetch(`https://homestead.onrender.com/properties/${Id}`);
+      const propertyData = await propertyResponse.json();
+  
+      const property = propertyData.properties[0];
+      console.log(property.name)
+
       const response = await fetch('https://homestead.onrender.com/bookings', {
         method: 'POST',
         headers: {
@@ -52,10 +60,12 @@ export default function ProductDetail() {
           rooms_booked: numberOfGuests,
           couponCode: couponCode,
           discountedPrice: totalPrice,
+          property_name: property.name, 
+          property_image: property.images.main, 
           
         }),
       });
-      console.log(response)
+      // console.log(response)
 
       if (response.ok) {
         MySwal.fire({
@@ -63,7 +73,8 @@ export default function ProductDetail() {
           title: 'Good job!',
           text: 'Payment successful and booking created!',
         });
-        // Optionally, you can perform any actions after successful booking creation
+        navigate('/bookings');
+       
       } else {
         MySwal.fire({
           icon: 'error',
@@ -84,7 +95,7 @@ export default function ProductDetail() {
   };
 
   const applyCoupon = () => {
-    if (couponCode.toLowerCase() === 'vaction10') {
+    if (couponCode.toLowerCase() === 'vacation10') {
       setDiscount(0.1); // 10% discount
     } else {
       setDiscount(0); // No discount

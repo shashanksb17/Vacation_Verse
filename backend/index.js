@@ -418,11 +418,10 @@ app.get('/hosts', (req, res) => {
         }
   
         // Create the booking
-        const insertQuery =
-          'INSERT INTO bookings (start_date, end_date, property_id, guest_id, total_fare, property_name, rooms_booked, property_image, coupon_code, discounted_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const insertQuery = 'INSERT INTO bookings (start_date, end_date, property_id, guest_id, total_fare, property_name, property_image, rooms_booked, coupon_code, discounted_price, ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         connection.query(
           insertQuery,
-          [start_date, end_date, property_id, guestId, totalFare, property.title, rooms_booked, property.picture, couponCode, discountedPrice],
+          [start_date, end_date, property_id, guestId, totalFare, property_name, property_image, rooms_booked, couponCode, discountedPrice, ],
           (error, result) => {
             if (error) {
               console.error('Failed to create booking:', error);
