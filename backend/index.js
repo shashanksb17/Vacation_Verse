@@ -389,6 +389,8 @@ app.get('/hosts', (req, res) => {
       }
   
       const property = propertyResults[0];
+      const property_name = property.name; 
+      const property_image = property.image; 
   
       // Calculate the number of days between start_date and end_date
       const startDate = new Date(start_date);
@@ -418,7 +420,7 @@ app.get('/hosts', (req, res) => {
         }
   
         // Create the booking
-        const insertQuery = 'INSERT INTO bookings (start_date, end_date, property_id, guest_id, total_fare, property_name, property_image, rooms_booked, coupon_code, discounted_price, ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const insertQuery = 'INSERT INTO bookings (start_date, end_date, property_id, guest_id, total_fare, property_name, property_image, rooms_booked, coupon_code, discounted_price ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         connection.query(
           insertQuery,
           [start_date, end_date, property_id, guestId, totalFare, property_name, property_image, rooms_booked, couponCode, discountedPrice, ],
