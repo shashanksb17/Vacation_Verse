@@ -390,7 +390,7 @@ app.get('/hosts', (req, res) => {
   
       const property = propertyResults[0];
       const property_name = property.name; 
-      const property_image = property.image; 
+      const property_image = property.images.main; 
   
       // Calculate the number of days between start_date and end_date
       const startDate = new Date(start_date);
