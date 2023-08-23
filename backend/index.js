@@ -475,7 +475,7 @@ app.get('/hosts', (req, res) => {
   // Get booking details
   app.get('/bookings',verifyGuestToken, (req, res) => {
     const guestId = req.userId;
-  console.log(req)
+    console.log(req)
     // Retrieve all bookings for the specified guest_id
     const query = 'SELECT * FROM bookings WHERE guest_id = ?';
     connection.query(query, [guestId], (error, results) => {
