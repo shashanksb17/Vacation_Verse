@@ -5,7 +5,7 @@ VacationVerse - Your Ultimate Vacation Booking Platform
 VacationVerse is a web application that allows hosts to list their properties for vacation rental and guests to book these properties for their perfect getaway. The platform provides a seamless experience for both hosts and guests, ensuring a hassle-free vacation planning process.
 
 ## Deployed App
-https://expensive-newt-snaps.cyclic.app/
+https://homestead.onrender.com
 
 ## Video Walkthrough of the Project
 
@@ -45,7 +45,7 @@ To use VacationVerse, follow these steps:
 - Google Maps API: Used to display property locations on the map.
 
 ## API Endpoints
-1. Register a new host
+1. **Register a new host**
    - `POST /host/register`
    - Request Body:
    ```json
@@ -67,7 +67,7 @@ To use VacationVerse, follow these steps:
    }
    ```
 
-2. Authenticate a host
+2. **Authenticate a host**
    - `POST /host/login`
    - Request Body:
    ```json
@@ -84,11 +84,11 @@ To use VacationVerse, follow these steps:
    }
    ```
 
-3. Get all hosts
+3. **Get all hosts**
    - `GET /hosts`
    - Response: Array of host objects
 
-4. Register a new guest
+4. **Register a new guest**
    - `POST /guest/register`
    - Request Body:
    ```json
@@ -107,7 +107,7 @@ To use VacationVerse, follow these steps:
    }
    ```
 
-5. Authenticate a guest
+5. **Authenticate a guest**
    - `POST /guest/login`
    - Request Body:
    ```json
@@ -125,7 +125,7 @@ To use VacationVerse, follow these steps:
    }
    ```
 
-6. Create a new property (hotel)
+6. **Create a new property (hotel)**
    - `POST /properties`
    - Authorization: Host JWT token required
    - Request Body:
@@ -150,7 +150,7 @@ To use VacationVerse, follow these steps:
    }
    ```
 
-7. Get all properties (hotels)
+7. **Get all properties (hotels)**
    - `GET /properties`
    - Query Parameters:
      - `location`: Property Location
@@ -158,13 +158,13 @@ To use VacationVerse, follow these steps:
      - `rating`: Minimum Property Rating (number)
    - Response: Array of property objects
 
-8. Get property details (hotel details)
+8. **Get property details (hotel details)**
    - `GET /properties/:property_id`
    - Path Parameters:
      - `property_id`: Property ID
    - Response: Property object
 
-9. Update property details (hotel details)
+9. **Update property details (hotel details)**
    - `PUT /properties/:property_id`
    - Authorization: Host JWT token required
    - Path Parameters:
@@ -189,7 +189,7 @@ To use VacationVerse, follow these steps:
    }
    ```
 
-10. Delete a property (hotel)
+10. **Delete a property (hotel)**
     - `DELETE /properties/:property_id`
     - Authorization: Host JWT token required
     - Path Parameters:
@@ -201,7 +201,7 @@ To use VacationVerse, follow these steps:
     }
     ```
 
-11. Create a new booking (room booking)
+11. **Create a new booking (room booking)**
     - `POST /bookings`
     - Authorization: Guest JWT token required
     - Request Body:
@@ -224,24 +224,24 @@ To use VacationVerse, follow these steps:
     }
     ```
 
-12. Get all bookings for a guest
+12. **Get all bookings for a guest**
     - `GET /bookings`
     - Authorization: Guest JWT token required
     - Response: Array of booking objects
 
-13. Update booking details
+13. **Update booking details**
     - `PUT /bookings/:booking_id`
     - Authorization: Guest JWT token required
     - Path Parameters:
       - `booking_id`: Booking ID
-    - Request
+    - Request Body:
 
- Body:
+
     ```json
     {
-      "start_date": "2023-07-29",
-      "end_date": "2023-08-01",
-      "rooms_booked": 3
+      "start_date": "2023-08-01",
+      "end_date": "2023-08-05",
+      "no_of_people": 3
     }
     ```
     - Response:
@@ -251,7 +251,7 @@ To use VacationVerse, follow these steps:
     }
     ```
 
-14. Delete a booking
+14. **Cancel a booking**
     - `DELETE /bookings/:booking_id`
     - Authorization: Guest JWT token required
     - Path Parameters:
@@ -259,17 +259,39 @@ To use VacationVerse, follow these steps:
     - Response:
     ```json
     {
-      "message": "Booking deleted successfully"
+      "message": "Booking canceled successfully"
     }
     ```
 
-## Technology Stack
-- Node.js
-- Express.js
-- MySQL
-- Bcrypt (for password hashing)
-- JWT (JSON Web Tokens) (for authentication)
-- CORS (Cross-Origin Resource Sharing)
-- Google Maps API (for property location mapping)
+**API's table**
 
-The API documentation above provides an overview of the project, its features, endpoints, and usage instructions. It's essential to keep the documentation updated whenever new features or changes are introduced to the API.
+
+| Endpoint                             | Description                                                  | Authorization  | Request Body                                                   | Response Body                                                  |
+|--------------------------------------|--------------------------------------------------------------|----------------|---------------------------------------------------------------|---------------------------------------------------------------|
+| `POST /host/register`                | Register a new host account                                  | None           | `{ "name": "", "email": "", "password": "", ... }`             | `{ "message": "Host registered successfully" }`               |
+| `POST /host/login`                   | Authenticate a host                                          | None           | `{ "email": "", "password": "" }`                             | `{ "success": true, "token": "" }`                            |
+| `GET /hosts`                         | Get all hosts                                                | Host JWT token | -                                                             | Array of host objects                                         |
+| `POST /guest/register`               | Register a new guest account                                 | None           | `{ "name": "", "email": "", "password": "", ... }`             | `{ "message": "User registered successfully" }`              |
+| `POST /guest/login`                  | Authenticate a guest                                         | None           | `{ "email": "", "password": "" }`                             | `{ "success": true, "token": "", "name": "" }`                |
+| `POST /properties`                   | Create a new property (hotel)                                | Host JWT token | `{ "name": "", "about": "", "property_type": "", ... }`       | `{ "message": "Property created successfully" }`             |
+| `GET /properties`                    | Get all properties (hotels)                                  | None           | Query params: `location`, `amenities`, `rating`             | Array of property objects                                     |
+| `GET /properties/:property_id`       | Get property details (hotel details)                        | None           | -                                                             | Property object                                               |
+| `PUT /properties/:property_id`       | Update property details (hotel details)                     | Host JWT token | `{ "title": "", "description": "", "price": "", ... }`        | `{ "message": "Property updated successfully" }`             |
+| `DELETE /properties/:property_id`    | Delete a property (hotel)                                    | Host JWT token | -                                                             | `{ "message": "Property deleted successfully" }`             |
+| `POST /bookings`                     | Create a new booking (room booking)                          | Guest JWT token| `{ "start_date": "", "end_date": "", "property_id": "", ...}` | `{ "bookingId": "", "totalFare": "", "message": "" }`         |
+| `GET /bookings`                      | Get all bookings for a guest                                 | Guest JWT token| -                                                             | Array of booking objects                                      |
+| `PUT /bookings/:booking_id`          | Update booking details                                       | Guest JWT token| `{ "start_date": "", "end_date": "", "no_of_people": "" }`   | `{ "message": "Booking updated successfully" }`              |
+| `DELETE /bookings/:booking_id`       | Cancel a booking                                             | Guest JWT token| -                                                             | `{ "message": "Booking canceled successfully" }`             |
+
+
+
+## Technologies Used
+- Frontend: React.js
+- Backend: Node.js, Express.js
+- Database: MongoDB
+- Authentication: JSON Web Tokens (JWT)
+- Styling: CSS and Material-UI
+- Map Integration: Google Maps API
+
+## Conclusion
+VacationVerse offers a user-friendly and efficient platform for both hosts and guests to manage vacation rentals. With its intuitive interface and robust features, vacation planning and property management become a breeze. Whether you're a host looking to list your property or a guest seeking the perfect getaway, VacationVerse has you covered.
