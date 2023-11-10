@@ -159,7 +159,7 @@ app.get('/hosts', (req, res) => {
           console.error('Failed to register user:', error);
           res.status(500).json({ message: 'Failed to register user' });
         } else {
-          res.status(201).json({ message: 'User registered successfully',success:true,name:host.name});
+          res.status(201).json({ message: 'User registered successfully',success:true});
         }
       });
     });
